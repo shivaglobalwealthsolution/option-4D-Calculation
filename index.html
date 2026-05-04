@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shiva Global Wealth Solution | FinTech & Research</title>
+    <style>
+        /* CORE BRANDING & VARIABLES */
+        :root {
+            --bg-deep: #0F0F1A;
+            --bg-card: #1A1A2E;
+            --accent-saffron: #FF9933;
+            --accent-saffron-dim: rgba(255, 153, 51, 0.2);
+            --text-main: #E0E0E0;
+            --text-muted: #A0A0B5;
+            --border-subtle: #2A2A40;
+            --success-green: #4CAF50;
+            --danger-red: #C62828;
+        }
+
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background-color: var(--bg-deep); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        
+        /* TICKER TAPE */
+        .ticker-wrap { width: 100%; background: #000; border-bottom: 1px solid var(--accent-saffron); overflow: hidden; padding: 5px 0; white-space: nowrap; box-sizing: border-box; }
+        .ticker { display: inline-block; white-space: nowrap; padding-right: 100%; box-sizing: content-box; animation: ticker 30s linear infinite; font-family: monospace; font-size: 12px; color: var(--accent-saffron); letter-spacing: 1px;}
+        .ticker-item { padding: 0 2rem; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-100%, 0, 0); } }
+
+        /* HEADER & NAVIGATION */
+        .site-header { background: var(--bg-card); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 100; position: sticky; top: 0;}
+        .logo-container { flex: 1; display: flex; align-items: center; gap: 15px;}
+        .logo-container img { height: 50px; object-fit: contain; }
+        .company-title { flex: 2; text-align: center; color: #fff; margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;}
+        .company-title span { color: var(--accent-saffron); }
+        .header-spacer { flex: 1; display: flex; justify-content: flex-end;} 
+        
+        .main-nav { background: rgba(0,0,0,0.3); display: flex; justify-content: center; padding: 0; margin: 0; list-style: none; border-bottom: 1px solid var(--border-subtle); }
+        .main-nav button { background: transparent; color: var(--text-muted); border: none; padding: 15px 30px; font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .main-nav button:hover { color: #fff; }
+        .main-nav button.active { color: var(--accent-saffron); border-bottom: 2px solid var(--accent-saffron); }
+
+        /* PAGE SECTIONS */
+        .page-section { display: none; padding: 0; flex: 1; max-width: 100%; }
+        .page-section.active { display: block; animation: fadeIn 0.5s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        h1, h2, h3 { color: #fff; }
+        h2 { font-size: 28px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 30px; display: inline-block;}
+        h2 span { color: var(--accent-saffron); }
+
+        /* HERO SECTION */
+        .hero { text-align: center; padding: 80px 20px; background: radial-gradient(circle at center, var(--bg-card) 0%, var(--bg-deep) 100%); position: relative; border-bottom: 1px solid var(--border-subtle);}
+        .hero h1 { font-size: 48px; margin: 0 0 20px 0; letter-spacing: -1px; }
+        .hero p.subhead { font-size: 18px; color: var(--text-muted); max-width: 800px; margin: 0 auto 30px auto; line-height: 1.6;}
+        .hero p.tagline { color: var(--accent-saffron); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; font-size: 14px; margin-bottom: 40px;}
+        .btn { padding: 12px 24px; background: var(--accent-saffron); color: #000; border: none; border-radius: 4px; font-weight: bold; font-size: 14px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; display: inline-block; margin: 5px;}
+        .btn:hover { background: #fff; color: #000; box-shadow: 0 0 15px var(--accent-saffron-dim); }
+        .btn-outline { background: transparent; border: 1px solid var(--accent-saffron); color: var(--accent-saffron); }
+        .btn-outline:hover { background: var(--accent-saffron); color: #000; }
+        
+        .stats-bar { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid var(--border-subtle); }
+        .stat-item h4 { color: var(--accent-saffron); font-size: 32px; margin: 0 0 5px 0; }
+        .stat-item p { margin: 0; color: var(--text-muted); font-size: 12px; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* GRID CARDS */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 30px; transition: 0.3s; position: relative; overflow: hidden;}
+        .card:hover { border-color: var(--accent-saffron); transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.5);}
+        .card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent-saffron); }
+        .card h3 { margin-top: 0; font-size: 20px; }
+        .card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; margin-bottom: 20px;}
+        .badge { background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); color: var(--accent-saffron); padding: 4px 8px; border-radius: 4px; font-size: 11px; margin-right: 5px; display: inline-block; margin-bottom: 5px;}
+
+        /* ABOUT SECTION */
+        .about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: center; }
+        .about-img { width: 100%; border-radius: 8px; border: 1px solid var(--border-subtle); }
+        .quote { font-style: italic; border-left: 3px solid var(--accent-saffron); padding-left: 20px; margin: 30px 0; color: #fff; font-size: 18px;}
+
+        /* ==========================================
+           STRATEGY MODULE SYSTEM
+           ========================================== */
+        .strategy-module { background: #0A0A12; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 25px; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .strategy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px; }
+        .strategy-actions { display: flex; gap: 10px; align-items: center; }
+        .strategy-title-container { text-align: left; }
+        .strategy-title-container h2 { margin: 0; font-size: 24px; border: none; padding: 0; display: inline-block;}
+        .strategy-title-container p { color: var(--text-muted); margin: 5px 0 0 0; font-size: 13px; }
+        
+        .save-indicator { color: var(--accent-saffron); font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s; background: rgba(255, 153, 51, 0.1); padding: 8px 12px; border-radius: 4px;}
+
+        /* TABLE UI OVERRIDES FOR DARK THEME */
+        .table-box { background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 30px; overflow-x: auto; }
+        .table-box h3 { margin-top: 0; color: #fff; font-size: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;}
+        table { width: 100%; border-collapse: collapse; min-width: 1500px; }
+        th, td { border: 1px solid var(--border-subtle); padding: 10px 8px; text-align: center; font-size: 13px; white-space: nowrap; color: var(--text-main); }
+        th { background: #11111A; position: sticky; top: 0; z-index: 10; font-weight: 600; color: var(--accent-saffron); letter-spacing: 1px;}
+        
+        .bg-green { background-color: rgba(46, 125, 50, 0.1) !important; color: #81C784; }
+        .bg-red { background-color: rgba(198, 40, 40, 0.1) !important; color: #E57373; }
+        .bg-yellow { background-color: rgba(255, 153, 51, 0.1) !important; color: var(--accent-saffron); }
+        
+        input { width: 90%; padding: 6px; background: var(--bg-deep); border: 1px solid var(--border-subtle); color: #fff; border-radius: 4px; font-size: 13px; text-align: center; }
+        input:focus { outline: none; border-color: var(--accent-saffron); }
+        .message-col { text-align: left; font-size: 11px; white-space: pre-wrap; font-family: monospace; color: var(--accent-saffron); background: rgba(0,0,0,0.3);}
+
+        /* REDESIGNED STATUS BADGE DROPDOWNS */
+        select.status-badge {
+            appearance: none; -webkit-appearance: none;
+            width: 100%; min-width: 90px;
+            /* Extra padding on the right prevents text from hitting the arrow */
+            padding: 6px 22px 6px 8px; 
+            font-size: 11px; font-weight: 800; border-radius: 4px; letter-spacing: 0.5px;
+            cursor: pointer; text-align: center; text-align-last: center; 
+            outline: none; transition: all 0.3s ease;
+            background-repeat: no-repeat; 
+            background-position: right 8px center; 
+            background-size: 10px auto;
+        }
+        select.status-badge option { background: var(--bg-card); color: #fff; }
+        
+        /* ACTIVE STATE (Saffron) */
+        select.status-badge.badge-active {
+            background-color: rgba(255, 153, 51, 0.1);
+            color: var(--accent-saffron);
+            border: 1px solid rgba(255, 153, 51, 0.4);
+            /* Custom SVG Arrow colored to match Saffron */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FF9933%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+        }
+        
+        /* TARGET REACHED STATE (Neon Green) */
+        select.status-badge.badge-tgt {
+            background-color: rgba(76, 175, 80, 0.1);
+            color: #81C784;
+            border: 1px solid rgba(76, 175, 80, 0.4);
+            /* Custom SVG Arrow colored to match Green */
+            background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+        }
+
+        /* Delete Action Button */
+        .btn-delete { background: rgba(198, 40, 40, 0.2); border: 1px solid var(--danger-red); color: #E57373; padding: 4px 10px; font-weight: bold; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.2s;}
+        .btn-delete:hover { background: var(--danger-red); color: #fff;}
+
+        /* FOOTER & DISCLAIMER */
+        .site-footer { background: #05050A; color: var(--text-muted); text-align: center; padding: 40px 20px; margin-top: auto; border-top: 1px solid var(--accent-saffron);}
+        .disclaimer-box { border: 1px solid #333; padding: 20px; text-align: left; font-size: 11px; line-height: 1.6; max-width: 1200px; margin: 30px auto 0 auto; background: rgba(255,0,0,0.05); color: #888;}
+        .footer-links a { color: var(--accent-saffron); text-decoration: none; margin: 0 10px;}
+        
+        @media (max-width: 950px) {
+            .about-grid { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 32px; }
+            .company-title { font-size: 16px; }
+            .header-spacer { display: none; }
+            
+            /* Responsive Module Header */
+            .strategy-header { flex-direction: column; gap: 20px; align-items: flex-start;}
+            .strategy-actions { justify-content: flex-start; width: 100%; flex-wrap: wrap;}
+        }
+    </style>
+</head>
+<body>
+
+<!-- TICKER TAPE -->
+<div class="ticker-wrap">
+    <div class="ticker">
+        <div class="ticker-item">NIFTY 50 • SENSEX • BANKNIFTY • RELIANCE • TCS • TATA MOTORS • XAUUSD • EURUSD • USTEC • BUILT IN INDIA • ENGINEERED FOR THE WORLD</div>
+    </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="logo-container">
+        <img src="Shiva.png" alt="Shiva Logo" onerror="this.src='https://via.placeholder.com/150x50/1A1A2E/FF9933?text=SHIVA+GLOBAL'">
+    </div>
+    <h1 class="company-title">Shiva Global <span>Wealth Solution</span></h1>
+    <div class="header-spacer">
+        <a href="#tools" onclick="switchPage('tools')" class="btn" style="padding: 8px 15px; font-size: 12px;">Launch Terminal</a>
+    </div>
+</header>
+
+<!-- NAVIGATION -->
+<ul class="main-nav">
+    <li><button id="nav-home" class="active" onclick="switchPage('home')">Company Portfolio</button></li>
+    <li><button id="nav-tools" onclick="switchPage('tools')">Research Terminal</button></li>
+</ul>
+
+<!-- ==========================================
+     PAGE 1: PORTFOLIO
+     ========================================== -->
+<main id="home" class="page-section active">
+    
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Decoding Hidden Gaps. <br><span style="color: var(--accent-saffron);">Conquering Global Markets.</span></h1>
+        <p class="subhead">Algorithmic Trading Technology | Indian Market Research Tools | <br> Forex & Commodities Systems | Financial Education <br>— All Built from the Heart of Gujarat.</p>
+        <p class="tagline">Proudly Built from Scratch. Engineered for the World.</p>
+        <div>
+            <button class="btn" onclick="switchPage('tools')">Explore Our Technology</button>
+            <a href="https://linktr.ee/bhargavrecommend1ng" target="_blank" class="btn btn-outline">Aim Leadership Academy</a>
+        </div>
+        
+        <div class="stats-bar">
+            <div class="stat-item"><h4>23+</h4><p>Strategy Engines</p></div>
+            <div class="stat-item"><h4>5,600+</h4><p>Lines of Code</p></div>
+            <div class="stat-item"><h4>Nifty 500</h4><p>Research Coverage</p></div>
+            <div class="stat-item"><h4>6</h4><p>Global Instruments</p></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="container">
+        <h2>The Mind <span>Behind the Machine</span></h2>
+        <div class="about-grid">
+            <div>
+                <img src="IMG_20250304_113713_188.jpg" alt="Company Motif" class="about-img" onerror="this.src='https://via.placeholder.com/400x400/1A1A2E/FF9933?text=Aim+Leadership'">
+            </div>
+            <div>
+                <p><strong>Bhargav Achary</strong> is not your typical market participant. Armed with a B.Tech in Information Technology and a Master's in Cyber Security, he chose to decode financial markets — applying the rigor of cybersecurity to the chaos of price action.</p>
+                <p>Based in Gujarat — far from Mumbai's Street or Wall Street — he is proving that world-class trading technology can be built from anywhere in India. His philosophy draws from two worlds: the precision of institutional trading frameworks like ICT/SMC and the timeless discipline of Indian wisdom traditions.</p>
+                <p>He founded <strong>Shree Shivam Foundation</strong> to house two missions: <em>Shiva Global Wealth Solution</em> for building algorithmic research tools, and <em>Aim Leadership Academy</em> to make general financial literacy accessible to every Indian.</p>
+                
+                <div style="margin-top: 20px;">
+                    <span class="badge">M.Tech Cyber Security</span>
+                    <span class="badge">Algo System Developer</span>
+                    <span class="badge">ICT/SMC Researcher</span>
+                    <span class="badge">Financial Educator</span>
+                </div>
+                
+                <div class="quote">"Success isn't found in what you hope will happen, but in how you navigate price and sentiment. 
+						We’ve built a framework that bypasses the noise to master the market’s true mechanics—delivering results that go far beyond the bar"</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INDIAN MARKETS -->
+    <section class="container" style="background: var(--bg-card); border-radius: 12px; padding: 40px; border: 1px solid var(--border-subtle);">
+        <p style="color: var(--accent-saffron); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; font-size: 12px;">Our Home Ground</p>
+        <h2 style="margin-top: 0; border: none;">Indian Markets: <span>The Ecosystem</span></h2>
+        <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 30px; max-width: 800px;">*All systems shown below are personal research tools built for educational demonstration. Nothing constitutes investment advice or trading calls.</p>
+        
+        <div class="grid-2">
+            <div class="card">
+                <h3>Momentum Engine</h3>
+                <p>Breakout strategy logic inspired by time-tested market patterns — refined with modern quantitative filters. Built to study Nifty and BankNifty momentum behaviour.</p>
+                <span class="badge">Python</span> <span class="badge">Zerodha API</span>
+            </div>
+            <div class="card">
+                <h3>ICT/SMC Engine</h3>
+                <p>Research tool implementing institutional trading concepts — Fair Value Gaps (FVGs), Order Blocks, and liquidity sweeps. Applied to Indian market structure.</p>
+                <span class="badge">Order Flow</span> <span class="badge">Price Action</span>
+            </div>
+            <div class="card">
+                <h3>Option Research Engine</h3>
+                <p>Systematic approach to F&O analysis. Mathematical frameworks studying option behaviour on select Indian blue chips (Tata Motors, Reliance, TCS).</p>
+                <span class="badge">Dhan API</span> <span class="badge">G-Sheets</span>
+            </div>
+            <div class="card">
+                <h3>Trend Checker Engine</h3>
+                <p>Multi-timeframe trend identification and confirmation tool for Nifty 500 stocks. Combines market structure, MA alignment, and volume confirmation.</p>
+                <span class="badge">Nifty 500</span> <span class="badge">Screener</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBAL MARKETS -->
+    <section class="container">
+        <p style="color: var(--accent-saffron); font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 5px; font-size: 12px;">Extending the Edge</p>
+        <h2 style="margin-top: 0; border: none;">Global Markets: <span>PHANTOM</span></h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px;">Precision Hybrid Algorithmic Neural Trading & Optimization Machine. A fully automated algorithmic trading system built from scratch in Python (~5,600 lines of code) for global forex and indices research.</p>
+        
+        <div class="grid-3">
+            <div class="card">
+                <h3 style="color: var(--accent-saffron);">QUAD Exit Model</h3>
+                <p>Proprietary 4-target exit system (0.75R, 1.5R, 2.5R, 4.0R). Stop-loss moves to breakeven after Target 1. Built to optimize risk-reward and drawdown control.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-saffron);">Tiered Risk Engine</h3>
+                <p>Tier 1 instruments run at 0.75% risk, stepping to 1.0% after equity buffer. Gold (XAUUSD) classified as Tier 2 and strictly capped.</p>
+            </div>
+            <div class="card">
+                <h3 style="color: var(--accent-saffron);">Zero Synthetic Data</h3>
+                <p>Dual-Engine architecture running rigorous backtests using real CSV export data. No curve-fitting. No data snooping. Pure logic.</p>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+
+<!-- ==========================================
+     PAGE 2: TOOLS (TRADING TERMINAL)
+     ========================================== -->
+<main id="tools" class="page-section container" style="max-width: 100%; padding: 20px;">
+    
+    <!-- STRATEGY MODULE WRAPPER -->
+    <div class="strategy-module">
+        
+        <!-- Module Header (Title Left, Buttons Right) -->
+        <div class="strategy-header">
+            <div class="strategy-title-container">
+                <h2>Shiva's <span>Options Research Terminal</span></h2>
+                <p>Personal logic engine for Options calculations. Data is auto-saved locally.</p>
+            </div>
+            
+            <div class="strategy-actions">
+                <span class="save-indicator" id="saveIndicator">✓ Auto-Saved</span>
+                <button class="btn" onclick="addRow()">+ Add Stock</button>
+                <button class="btn btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearData()">Clear Data</button>
+            </div>
+        </div>
+
+        <!-- BOX 1: Data Entry -->
+        <div class="table-box">
+            <h3>1. Market Data Input Feed</h3>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Stock Name</th>
+                        <th>Lot Size</th>
+                        <th class="bg-green">Min OI</th>
+                        <th>Strike Diff</th>
+                        <th class="bg-yellow">High</th>
+                        <th class="bg-yellow">Low</th>
+                        <th class="head-ce">CE Start</th>
+                        <th class="head-ce">CE End</th>
+                        <th class="head-pe">PE Start</th>
+                        <th class="head-pe">PE End</th>
+                        <th>Final CE Strike</th>
+                        <th class="bg-yellow">CE 4D High</th>
+                        <th class="bg-yellow">CE 3D Low</th>
+                        <th>CE Status</th>
+                        <th>Final PE Strike</th>
+                        <th class="bg-yellow">PE 4D High</th>
+                        <th class="bg-yellow">PE 3D Low</th>
+                        <th>PE Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+        </div>
+
+        <!-- BOX 2: Calculations -->
+        <div class="table-box" style="margin-bottom: 0;">
+            <h3>2. Algorithmic Output Engine</h3>
+            <table id="calcTable">
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th class="bg-yellow">CE Strike</th>
+                        <th class="head-ce">CE Entry</th>
+                        <th class="head-ce">CE Buffer</th>
+                        <th class="head-ce">CE TGT</th>
+                        <th class="head-ce">CE SL</th>
+                        <th class="bg-yellow">PE Strike</th>
+                        <th class="head-pe">PE Entry</th>
+                        <th class="head-pe">PE Buffer</th>
+                        <th class="head-pe">PE TGT</th>
+                        <th class="head-pe">PE SL</th>
+                        <th>Generated Broadcast Message</th>
+                    </tr>
+                </thead>
+                <tbody id="calcBody"></tbody>
+            </table>
+        </div>
+
+    </div> <!-- End Strategy Module Wrapper -->
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div style="margin-bottom: 20px;" class="footer-links">
+        <a href="mailto:shivaglobalwealthsolution@gmail.com">shivaglobalwealthsolution@gmail.com</a> | 
+        <a href="https://linktr.ee/bhargavrecommend1ng" target="_blank">Linktree</a> | 
+        Based in Gujarat, India
+    </div>
+    <div>&copy; 2026 Shiva Global Wealth Solution. A Shree Shivam Foundation Venture.</div>
+    
+    <div class="disclaimer-box">
+        <strong>MANDATORY SEBI DISCLAIMER:</strong> Bhargav Achary and Shiva Global Wealth Solution are NOT registered with the Securities and Exchange Board of India (SEBI) as a Research Analyst (RA) or Investment Adviser (IA). All algorithmic trading systems, tools, and strategies showcased on this website are personal research projects built for the developer's own use and educational demonstration purposes only. Nothing on this website — including text, tools, systems, courses, or any other content — constitutes or should be construed as investment advice, stock recommendations, trading calls, tips, model portfolio suggestions, or any form of advisory service under SEBI Regulations. Past performance of any system or backtest does not guarantee future results. Trading involves risk. Readers are strongly encouraged to consult SEBI-registered professionals before making investment decisions.
+    </div>
+</footer>
+
+<script>
+    let appData = [];
+
+    // Navigation Logic
+    function switchPage(pageId) {
+        document.querySelectorAll('.page-section').forEach(el => el.classList.remove('active'));
+        document.querySelectorAll('.main-nav button').forEach(el => el.classList.remove('active'));
+        document.getElementById(pageId).classList.add('active');
+        document.getElementById('nav-' + pageId).classList.add('active');
+        window.scrollTo(0,0);
+    }
+
+    // Math Utility Functions
+    function mround(val) { if (isNaN(val) || val === null) return 0; return (Math.round(val * 20) / 20).toFixed(2); }
+    function excelFloor(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.floor(num / sig) * sig; }
+    function excelCeil(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.ceil(num / sig) * sig; }
+
+    /* =========================================================================
+       OBFUSCATED BLACK BOX ENGINE 
+       ========================================================================= */
+    const _0xEngine = (function(){
+        const _0xC = JSON.parse(atob('eyJDRSI6eyJFbnRyeU11bCI6MS4wNywiQnVmZmVyTXVsIjoxLjAyNSwiVGd0QWRkIjowLjAzLCJNc2xTdWIiOjAuMDI1LCJUc2xNdWwiOjAuOX0sIlBFIjp7IkVudHJ5TXVsIjoxLjA3LCJCdWZmZXJNdWwiOjEuMDcsIlRndEFkZCI6MC4wMjUsIk1zbFN1YiI6MC4wMjUsIlRzbE11bCI6MC45fX0='));
+        return {
+            _c: function(_s, _st, _h, _l, _isC) {
+                if(_s === atob('VEdU') || !_h || !_st) return Array(4).fill(atob('Ti5B'));
+                let _cf = _isC ? _0xC.CE : _0xC.PE;
+                let _e = parseFloat(mround(_h * _cf.EntryMul)); let _b = parseFloat(mround(_e * _cf.BufferMul));
+                let _t = parseFloat(mround(_e + (_st * _cf.TgtAdd))); let _m = parseFloat(mround(_e - (_st * _cf.MslSub)));
+                let _ts = parseFloat(mround(_l * _cf.TslMul)); let _sl = Math.max(_m, _ts).toFixed(2);
+                return [_e.toFixed(2), _b.toFixed(2), _t.toFixed(2), _sl];
+            }
+        }
+    })();
+
+    function handleInput(el) {
+        const tr = el.closest('tr');
+        const lot = parseFloat(tr.querySelector('[data-field="lot"]').value);
+        const strikeDiff = parseFloat(tr.querySelector('[data-field="strikeDiff"]').value);
+        const high = parseFloat(tr.querySelector('[data-field="high"]').value);
+        const low = parseFloat(tr.querySelector('[data-field="low"]').value);
+
+        // Update dropdown CSS class based on selection
+        if(el.tagName === 'SELECT') {
+            el.className = 'status-badge ' + (el.value === 'TGT' ? 'badge-tgt' : 'badge-active');
+        }
+
+        tr.querySelector('.out-minOI').innerText = !isNaN(lot) ? (lot * 90).toLocaleString() : '-';
+
+        if (!isNaN(high) && !isNaN(strikeDiff)) {
+            tr.querySelector('.out-ceStart').innerText = excelFloor(high * 0.97, strikeDiff);
+            tr.querySelector('.out-ceEnd').innerText = excelCeil(high * 1.03, strikeDiff);
+        } else {
+            tr.querySelector('.out-ceStart').innerText = '-'; tr.querySelector('.out-ceEnd').innerText = '-';
+        }
+
+        if (!isNaN(low) && !isNaN(strikeDiff)) {
+            tr.querySelector('.out-peStart').innerText = excelCeil(low * 1.03, strikeDiff);
+            tr.querySelector('.out-peEnd').innerText = excelFloor(low * 0.97, strikeDiff);
+        } else {
+            tr.querySelector('.out-peStart').innerText = '-'; tr.querySelector('.out-peEnd').innerText = '-';
+        }
+        triggerSave();
+    }
+
+    function triggerSave() {
+        const ind = document.getElementById('saveIndicator');
+        ind.style.opacity = '1'; setTimeout(() => ind.style.opacity = '0', 1500);
+        
+        const rows = document.querySelectorAll('#dataBody tr');
+        appData = [];
+        rows.forEach((row, i) => {
+            const inputs = row.querySelectorAll('input, select');
+            const rowObj = { id: i };
+            inputs.forEach(inp => { rowObj[inp.dataset.field] = inp.value; });
+            appData.push(rowObj);
+        });
+        
+        localStorage.setItem('shivaMasterData', JSON.stringify(appData));
+        renderCalculations(); 
+    }
+
+    function renderCalculations() {
+        const tbody = document.getElementById('calcBody');
+        tbody.innerHTML = '';
+
+        appData.forEach(row => {
+            const tr = document.createElement('tr');
+            
+            const ce = _0xEngine._c(row.ceStat || 'NO TGT', parseFloat(row.fcStrike), parseFloat(row.ce4D), parseFloat(row.ce3D), true);
+            const pe = _0xEngine._c(row.peStat || 'NO TGT', parseFloat(row.fpStrike), parseFloat(row.pe4D), parseFloat(row.pe3D), false);
+
+            let msg = '';
+            if(ce[0] !== 'N.A' && ce[0] !== undefined) {
+                msg += `${row.stock || ''} ${row.fcStrike || ''} CE | Entry: ${ce[0]} - ${ce[1]} | TGT: ${ce[2]} | SL: ${ce[3]}\n`;
+            }
+            if(pe[0] !== 'N.A' && pe[0] !== undefined) {
+                msg += `${row.stock || ''} ${row.fpStrike || ''} PE | Entry: ${pe[0]} - ${pe[1]} | TGT: ${pe[2]} | SL: ${pe[3]}`;
+            }
+
+            tr.innerHTML = `
+                <td><strong>${row.stock || ''}</strong></td>
+                <td class="bg-yellow"><strong>${row.fcStrike || ''}</strong></td>
+                <td class="bg-green">${ce[0]}</td><td class="bg-green">${ce[1]}</td><td class="bg-green"><strong>${ce[2]}</strong></td><td class="bg-green">${ce[3]}</td>
+                
+                <td class="bg-yellow"><strong>${row.fpStrike || ''}</strong></td>
+                <td class="bg-red">${pe[0]}</td><td class="bg-red">${pe[1]}</td><td class="bg-red"><strong>${pe[2]}</strong></td><td class="bg-red">${pe[3]}</td>
+                <td class="message-col">${msg}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function addRow(data = {}) {
+        const tbody = document.getElementById('dataBody');
+        const tr = document.createElement('tr');
+        
+        const ceStatVal = data.ceStat || 'NO TGT';
+        const ceStatClass = ceStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
+        
+        const peStatVal = data.peStat || 'NO TGT';
+        const peStatClass = peStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
+
+        tr.innerHTML = `
+            <td><input type="text" data-field="stock" value="${data.stock || ''}" placeholder="Stock" oninput="handleInput(this)"></td>
+            <td><input type="number" data-field="lot" value="${data.lot || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-green readonly-calc out-minOI">-</td>
+            <td><input type="number" data-field="strikeDiff" value="${data.strikeDiff || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="high" value="${data.high || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="low" value="${data.low || ''}" oninput="handleInput(this)"></td>
+            
+            <td class="bg-green readonly-calc out-ceStart">-</td>
+            <td class="bg-green readonly-calc out-ceEnd">-</td>
+            <td class="bg-red readonly-calc out-peStart">-</td>
+            <td class="bg-red readonly-calc out-peEnd">-</td>
+            
+            <td><input type="number" data-field="fcStrike" value="${data.fcStrike || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce4D" value="${data.ce4D || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce3D" value="${data.ce3D || ''}" oninput="handleInput(this)"></td>
+            <td>
+                <select data-field="ceStat" class="status-badge ${ceStatClass}" onchange="handleInput(this)">
+                    <option value="NO TGT" ${ceStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
+                    <option value="TGT" ${ceStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
+                </select>
+            </td>
+
+            <td><input type="number" data-field="fpStrike" value="${data.fpStrike || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe4D" value="${data.pe4D || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe3D" value="${data.pe3D || ''}" oninput="handleInput(this)"></td>
+            <td>
+                <select data-field="peStat" class="status-badge ${peStatClass}" onchange="handleInput(this)">
+                    <option value="NO TGT" ${peStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
+                    <option value="TGT" ${peStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
+                </select>
+            </td>
+            
+            <td><button class="btn-delete" onclick="deleteRow(this)">X</button></td>
+        `;
+        tbody.appendChild(tr);
+        handleInput(tr.querySelector('[data-field="stock"]'));
+    }
+
+    function deleteRow(btn) { btn.closest('tr').remove(); triggerSave(); }
+    function clearData() { if(confirm("Clear all data permanently?")) { localStorage.removeItem('shivaMasterData'); document.getElementById('dataBody').innerHTML = ''; addRow(); } }
+
+    window.onload = () => {
+        const saved = localStorage.getItem('shivaMasterData');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.length > 0) { parsed.forEach(row => addRow(row)); renderCalculations(); return; }
+        }
+        addRow(); 
+    };
+</script>
+</body>
+</html>
