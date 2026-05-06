@@ -22,10 +22,20 @@
 
         .container { max-width: 100%; padding: 40px 20px; flex: 1; }
         
-        .btn { padding: 10px 20px; background: var(--accent-saffron); color: #000; border: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn { padding: 10px 20px; background: var(--accent-saffron); color: #000; border: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;text-decoration: none; }
         .btn:hover { background: #fff; box-shadow: 0 0 15px rgba(255, 153, 51, 0.4); }
         .btn-outline { background: transparent; border: 1px solid var(--accent-saffron); color: var(--accent-saffron); }
         .btn-outline:hover { background: var(--accent-saffron); color: #000; }
+
+        /* Social Export Buttons */
+        .btn-export { background: #11111A; border: 1px solid var(--text-muted); color: var(--text-muted); padding: 6px 12px; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.2s; font-weight: bold;}
+        .btn-export:hover { background: #fff; color: #000; border-color: #fff; }
+        .btn-wa { border-color: #25D366; color: #25D366; }
+        .btn-wa:hover { background: #25D366; color: #000; }
+        .btn-tg { border-color: #0088cc; color: #0088cc; }
+        .btn-tg:hover { background: #0088cc; color: #fff; }
+        .btn-copy { border-color: var(--accent-saffron); color: var(--accent-saffron); }
+        .btn-copy:hover { background: var(--accent-saffron); color: #000; }
 
         .strategy-module { background: #0A0A12; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 25px; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
         .strategy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px; }
@@ -43,6 +53,10 @@
         th, td { border: 1px solid var(--border-subtle); padding: 10px 8px; text-align: center; font-size: 13px; white-space: nowrap; color: var(--text-main); }
         th { background: #11111A; position: sticky; top: 0; z-index: 10; font-weight: 600; color: var(--accent-saffron); letter-spacing: 1px;}
         
+        /* Strategy 2 Specific Table Width Overrides for Side-by-Side */
+        #dataTable2, #calcTable2 { min-width: 100%; }
+        .s2-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 20px; }
+
         .bg-green { background-color: rgba(46, 125, 50, 0.1) !important; color: #81C784; }
         .bg-red { background-color: rgba(198, 40, 40, 0.1) !important; color: #E57373; }
         .bg-yellow { background-color: rgba(255, 153, 51, 0.1) !important; color: var(--accent-saffron); }
@@ -50,7 +64,6 @@
         
         input { width: 90%; padding: 6px; background: var(--bg-deep); border: 1px solid var(--border-subtle); color: #fff; border-radius: 4px; font-size: 13px; text-align: center; }
         input:focus { outline: none; border-color: var(--accent-saffron); }
-        .message-col { text-align: left; font-size: 11px; white-space: pre-wrap; font-family: monospace; color: var(--accent-saffron); background: rgba(0,0,0,0.3);}
 
         select.status-badge { appearance: none; -webkit-appearance: none; width: 100%; min-width: 90px; padding: 6px 22px 6px 8px; font-size: 11px; font-weight: 800; border-radius: 4px; letter-spacing: 0.5px; cursor: pointer; text-align: center; text-align-last: center; outline: none; transition: all 0.3s ease; background-repeat: no-repeat; background-position: right 8px center; background-size: 10px auto; }
         select.status-badge option { background: var(--bg-card); color: #fff; }
@@ -64,6 +77,7 @@
         .disclaimer-box { border: 1px solid #333; padding: 20px; text-align: left; font-size: 11px; line-height: 1.6; max-width: 1200px; margin: 30px auto 0 auto; background: rgba(255,0,0,0.05); color: #888;}
         .footer-links a { color: var(--accent-saffron); text-decoration: none; margin: 0 10px;}
         
+        @media (max-width: 1200px) { .s2-layout { grid-template-columns: 1fr; } }
         @media (max-width: 950px) {
             .company-title { font-size: 16px; }
             .header-spacer { display: none; }
@@ -74,40 +88,42 @@
 </head>
 <body>
 
-<header class="site-header">
+<<header class="site-header">
     <div class="logo-container">
         <img src="Shiva.png" alt="Shiva Logo" onerror="this.src='https://via.placeholder.com/150x50/1A1A2E/FF9933?text=SHIVA+GLOBAL'">
     </div>
     <h1 class="company-title">Shiva Global <span>Wealth Solution</span></h1>
-    <div class="header-spacer"></div>
+    <div class="header-spacer" align="right">
+        <a href="https://linktr.ee/bhargavrecommend1ng" target="_blank" class="btn btn-outline">Contact US</a>
+		<a href="index.html" class="btn btn-outline">Company Profile</a>
+    </div>
 </header>
-
 <ul class="main-nav">
-    <li><a href="index.html">Company Portfolio</a></li>
     <li><a href="terminal.html" class="active">Research Terminal</a></li>
 </ul>
 
 <main class="container">
     
-    <!-- STRATEGY MODULE 1 -->
+    <!-- ==========================================
+         STRATEGY MODULE 1: STOCK OPTIONS 4D
+         ========================================== -->
     <div class="strategy-module">
         <div class="strategy-header">
             <div class="strategy-title-container">
-                
                 <h2>Stock <span>Options 4D</span> Strategy 1</h2>
-                <p>Personal logic engine for Options calculations. Data will be auto-saved locally.</p>
+                <p>Personal logic engine for Options calculations. Data is auto-saved locally.</p>
             </div>
             
             <div class="strategy-actions">
-                <span class="save-indicator" id="saveIndicator">✓ Auto-Saved</span>
-                <button class="btn" onclick="addRow()">+ Add Stock</button>
-                <button class="btn btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearData()">Clear Data</button>
+                <span class="save-indicator" id="saveIndicator1">✓ Auto-Saved</span>
+                <button class="btn" onclick="addRowS1()">+ Add Stock</button>
+                <button class="btn btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearDataS1()">Clear Data</button>
             </div>
         </div>
 
         <div class="table-box">
             <h3>1. Market Data Input Feed</h3>
-            <table id="dataTable">
+            <table id="dataTable1">
                 <thead>
                     <tr>
                         <th>Stock Name</th>
@@ -121,23 +137,31 @@
                         <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE Start</th>
                         <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE End</th>
                         <th>Final CE Strike</th>
-                        <th class="bg-yellow">CE 4D Highest High</th>
-                        <th class="bg-yellow">CE 3D Lowest Low</th>
+                        <th class="bg-yellow">CE 4D High</th>
+                        <th class="bg-yellow">CE 3D Low</th>
                         <th>CE Status</th>
                         <th>Final PE Strike</th>
-                        <th class="bg-yellow">PE 4D Highest High</th>
-                        <th class="bg-yellow">PE 3D Lowest Low</th>
+                        <th class="bg-yellow">PE 4D High</th>
+                        <th class="bg-yellow">PE 3D Low</th>
                         <th>PE Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="dataBody"></tbody>
+                <tbody id="dataBody1"></tbody>
             </table>
         </div>
 
         <div class="table-box" style="margin-bottom: 0;">
-            <h3>2. Algorithmic Output Engine (4 Targets + Explicit SL Math)</h3>
-            <table id="calcTable">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Algorithmic Output Engine</h3>
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn-export btn-copy" id="btnCopy1" onclick="copyToClipboard(1)">📋 Copy</button>
+                    <button class="btn-export" onclick="downloadTXT(1)">💾 Save</button>
+                    <button class="btn-export btn-wa" onclick="shareSocial(1, 'wa')">💬 WhatsApp</button>
+                    <button class="btn-export btn-tg" onclick="shareSocial(1, 'tg')">✈️ Telegram</button>
+                </div>
+            </div>
+            <table id="calcTable1">
                 <thead>
                     <tr>
                         <th>Stock</th>
@@ -162,14 +186,82 @@
                         <th class="bg-dark">MSL</th>
                         <th class="bg-dark">TSL</th>
                         <th style="background:#f44336;color:white;border:1px solid #d32f2f">Final SL</th>
-                        
-                        <th>Generated Broadcast Message</th>
                     </tr>
                 </thead>
-                <tbody id="calcBody"></tbody>
+                <tbody id="calcBody1"></tbody>
             </table>
         </div>
-    </div> <!-- End Strategy Module Wrapper -->
+    </div> <!-- End Strategy Module 1 -->
+
+    <!-- ==========================================
+         STRATEGY MODULE 2: INDEX 9.30 SETUP
+         ========================================== -->
+    <div class="strategy-module">
+        <div class="strategy-header">
+            <div class="strategy-title-container">
+                <h2>Index <span>9.30 Setup</span> Strategy 2</h2>
+                <p>Fixed Algorithmic calculation for Indices. Enter Strike and Price to generate 5 Targets and Stop-Loss instantly.</p>
+            </div>
+            
+            <div class="strategy-actions">
+                <span class="save-indicator" id="saveIndicator2">✓ Auto-Saved</span>
+                <button class="btn btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearDataS2()">Clear Inputs</button>
+            </div>
+        </div>
+
+        <div class="s2-layout">
+            
+            <!-- PANEL 1: INPUT -->
+            <div class="table-box" style="margin-bottom: 0;">
+                <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px;">
+                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">1. Market Data Input Feed</h3>
+                </div>
+                <table id="dataTable2">
+                    <thead>
+                        <tr>
+                            <th>Index Name</th>
+                            <th>Premium Range</th>
+                            <th>Type</th>
+                            <th>Strike Price</th>
+                            <th class="bg-yellow">Premium Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataBody2"></tbody>
+                </table>
+            </div>
+
+            <!-- PANEL 2: OUTPUT -->
+            <div class="table-box" style="margin-bottom: 0;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Algorithmic Output Engine</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-export btn-copy" id="btnCopy2" onclick="copyToClipboard(2)">📋 Copy</button>
+                        <button class="btn-export" onclick="downloadTXT(2)">💾 Save</button>
+                        <button class="btn-export btn-wa" onclick="shareSocial(2, 'wa')">💬 WhatsApp</button>
+                        <button class="btn-export btn-tg" onclick="shareSocial(2, 'tg')">✈️ Telegram</button>
+                    </div>
+                </div>
+                <table id="calcTable2">
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Type</th>
+                            <th class="bg-yellow">Strike</th>
+                            <th>Entry</th>
+                            <th class="bg-dark">Stop-Loss</th>
+                            <th>TGT 1</th>
+                            <th>TGT 2</th>
+                            <th>TGT 3</th>
+                            <th>TGT 4</th>
+                            <th>TGT 5</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calcBody2"></tbody>
+                </table>
+            </div>
+
+        </div> 
+    </div> <!-- End Strategy Module 2 -->
 
 </main>
 
@@ -180,25 +272,32 @@
         Based in Gujarat, India
     </div>
     <div>&copy; 2026 Shiva Global Wealth Solution. A Shree Shivam Foundation Venture.</div>
-    <div class="disclaimer-box">
-        <strong>MANDATORY SEBI DISCLAIMER :</strong> Bhargav Achary and Shiva Global Wealth Solution are NOT registered with the Securities and Exchange Board of India (SEBI) as a Research Analyst (RA) or Investment Adviser (IA). All algorithmic trading systems, tools, and strategies showcased on this website are personal research projects built for the developer's own use and educational demonstration purposes only. Nothing on this website — including text, tools, systems, courses, or any other content — constitutes or should be construed as investment advice, stock recommendations, trading calls, tips, model portfolio suggestions, or any form of advisory service under SEBI Regulations. Past performance of any system or backtest does not guarantee future results. Trading involves risk. Readers are strongly encouraged to consult SEBI-registered professionals before making investment decisions.
-    </div>
+    <div class="disclaimer-box"><strong>MANDATORY SEBI DISCLAIMER:</strong> Bhargav Achary and Shiva Global Wealth Solution are NOT registered with the Securities and Exchange Board of India (SEBI) as a Research Analyst (RA) or Investment Adviser (IA).</div>
 </footer>
 
 <script>
-    let appData = [];
+    let appDataS1 = [];
+    let appDataS2 = {};
+
+    const S2_CONFIG = [
+        { id: 'nifty', name: 'Nifty 50', range: '100 - 120', buf: 0.20 },
+        { id: 'banknifty', name: 'Banknifty', range: '160 - 260', buf: 0.25 },
+        { id: 'midcap', name: 'Midcap Nifty', range: '60 - 90', buf: 0.15 },
+        { id: 'finnifty', name: 'Fin Nifty', range: '100 - 150', buf: 0.20 },
+        { id: 'sensex', name: 'Sensex', range: '250 - 400', buf: 0.25 }
+    ];
 
     function mround(val) { if (isNaN(val) || val === null) return 0; return (Math.round(val * 20) / 20).toFixed(2); }
     function excelFloor(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.floor(num / sig) * sig; }
     function excelCeil(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.ceil(num / sig) * sig; }
 
     /* =========================================================================
-       UPDATED OBFUSCATED BLACK BOX ENGINE 
-       Now outputs 9 variables: Entry, Buffer, T1, T2, T3, T4, MSL, TSL, Final SL
-       Targets: 3%, 4.5%, 6%, 8%
+       OBFUSCATED BLACK BOX ENGINE 
        ========================================================================= */
     const _0xEngine = (function(){
         const _0xC = JSON.parse(atob('eyJDRSI6eyJFbnRyeU11bCI6MS4wNywiQnVmZmVyTXVsIjoxLjAyNSwiVGd0cyI6WzAuMDMsMC4wNDUsMC4wNiwwLjA4XSwiTXNsU3ViIjowLjAyNSwiVHNsTXVsIjowLjl9LCJQRSI6eyJFbnRyeU11bCI6MS4wNywiQnVmZmVyTXVsIjoxLjA3LCJUZ3RzIjpbMC4wMywwLjA0NSwwLjA2LDAuMDhdLCJNc2xTdWIiOjAuMDI1LCJUc2xNdWwiOjAuOX19'));
+        const _0xS2 = JSON.parse(atob('eyJzbCI6MC43NSwgInQiOlsxLjI1LCAxLjMsIDEuNSwgMS43NSwgMi4wXX0='));
+        
         return {
             _c: function(_s, _st, _h, _l, _isC) {
                 if(_s === atob('VEdU') || !_h || !_st) return Array(9).fill(atob('Ti5B'));
@@ -213,11 +312,115 @@
                 let _ts = parseFloat(mround(_l * _cf.TslMul)); 
                 let _sl = Math.max(_m, _ts).toFixed(2);
                 return [_e.toFixed(2), _b.toFixed(2), _t1.toFixed(2), _t2.toFixed(2), _t3.toFixed(2), _t4.toFixed(2), _m.toFixed(2), _ts.toFixed(2), _sl];
+            },
+            _s2: function(price, bufRate) {
+                if(!price || isNaN(price)) return Array(7).fill('N.A');
+                let _e = parseFloat(mround(price * (1 + bufRate)));
+                let _sl = parseFloat(mround(_e * _0xS2.sl));
+                let _t1 = parseFloat(mround(_e * _0xS2.t[0]));
+                let _t2 = parseFloat(mround(_e * _0xS2.t[1]));
+                let _t3 = parseFloat(mround(_e * _0xS2.t[2]));
+                let _t4 = parseFloat(mround(_e * _0xS2.t[3]));
+                let _t5 = parseFloat(mround(_e * _0xS2.t[4]));
+                return [_e.toFixed(2), _sl.toFixed(2), _t1.toFixed(2), _t2.toFixed(2), _t3.toFixed(2), _t4.toFixed(2), _t5.toFixed(2)];
             }
         }
     })();
 
-    function handleInput(el) {
+    /* ==========================================
+       DATE FORMATTER & SOCIAL EXPORT LOGIC
+       ========================================== */
+    function getTomorrowStr() {
+        const t = new Date(); t.setDate(t.getDate() + 1);
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        return `${String(t.getDate()).padStart(2, '0')} ${months[t.getMonth()]}, ${t.getFullYear()}`;
+    }
+
+    function generateExportText(stratNum) {
+        let text = ``;
+        if (stratNum === 1) {
+            text = `Stocks Options for ${getTomorrowStr()}\n`;
+            appDataS1.forEach((row, idx) => {
+                if (!row.stock) return;
+                const ce = _0xEngine._c(row.ceStat || 'NO TGT', parseFloat(row.fcStrike), parseFloat(row.ce4D), parseFloat(row.ce3D), true);
+                const pe = _0xEngine._c(row.peStat || 'NO TGT', parseFloat(row.fpStrike), parseFloat(row.pe4D), parseFloat(row.pe3D), false);
+                let block = `${idx + 1}. ${row.stock} | \n`;
+                let hasData = false;
+                if(ce[0] !== 'N.A' && ce[0] !== undefined) {
+                    block += `    Call ${row.fcStrike || ''} || Entry: - ${ce[0]}, ${ce[1]} || Stop-Loss: - ${ce[8]} || Targets: - ${ce[2]},${ce[3]},${ce[4]},${ce[5]} \n`;
+                    hasData = true;
+                }
+                if(pe[0] !== 'N.A' && pe[0] !== undefined) {
+                    block += `    Put ${row.fpStrike || ''} || Entry: - ${pe[0]}, ${pe[1]} || Stop-Loss: - ${pe[8]} || Targets: - ${pe[2]},${pe[3]},${pe[4]},${pe[5]} \n`;
+                    hasData = true;
+                }
+                if(hasData) text += block;
+            });
+        } else if (stratNum === 2) {
+            text = `Index Options for ${getTomorrowStr()}\n`;
+            let indexCount = 1;
+            S2_CONFIG.forEach(cfg => {
+                const ceSt = appDataS2[`${cfg.id}_ce_strike`] || '';
+                const ceP = parseFloat(appDataS2[`${cfg.id}_ce_price`]);
+                const peSt = appDataS2[`${cfg.id}_pe_strike`] || '';
+                const peP = parseFloat(appDataS2[`${cfg.id}_pe_price`]);
+                
+                const ce = _0xEngine._s2(ceP, cfg.buf);
+                const pe = _0xEngine._s2(peP, cfg.buf);
+                
+                let block = `${indexCount}. ${cfg.name} | \n`;
+                let hasData = false;
+                if(ce[0] !== 'N.A') {
+                    block += `    Call ${ceSt} || Entry: - ${ce[0]} || Stop-Loss: - ${ce[1]} || Targets: - ${ce[2]},${ce[3]},${ce[4]},${ce[5]},${ce[6]} \n`;
+                    hasData = true;
+                }
+                if(pe[0] !== 'N.A') {
+                    block += `    Put ${peSt} || Entry: - ${pe[0]} || Stop-Loss: - ${pe[1]} || Targets: - ${pe[2]},${pe[3]},${pe[4]},${pe[5]},${pe[6]} \n`;
+                    hasData = true;
+                }
+                if(hasData) { text += block; indexCount++; }
+            });
+        }
+        return text;
+    }
+
+    function copyToClipboard(stratNum) {
+        const text = generateExportText(stratNum);
+        navigator.clipboard.writeText(text).then(() => {
+            const btn = document.getElementById('btnCopy' + stratNum);
+            if(btn) {
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '✅ Copied!';
+                setTimeout(() => { btn.innerHTML = originalText; }, 2000);
+            }
+        }).catch(err => { alert('Failed to copy text: ' + err); });
+    }
+
+    function downloadTXT(stratNum) {
+        const today = new Date();
+        const fDate = `${String(today.getDate()).padStart(2, '0')}_${today.toLocaleString('default',{month:'short'})}_${today.getFullYear()}`;
+        const blob = new Blob([generateExportText(stratNum)], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = `Stocksfor_${fDate}_S${stratNum}.txt`;
+        link.click();
+    }
+
+    function shareSocial(stratNum, platform) {
+        const encodedText = encodeURIComponent(generateExportText(stratNum));
+        if (platform === 'wa') {
+            window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+        } else if (platform === 'tg') {
+            // We put the text directly into the 'url=' parameter to satisfy Telegram's API
+            window.open(`https://t.me/share/url?url=${encodedText}`, '_blank');
+        }
+    }
+
+
+    /* ==========================================
+       STRATEGY 1 LOGIC (Options 4D)
+       ========================================== */
+    function handleInputS1(el) {
         const tr = el.closest('tr');
         const lot = parseFloat(tr.querySelector('[data-field="lot"]').value);
         const strikeDiff = parseFloat(tr.querySelector('[data-field="strikeDiff"]').value);
@@ -225,60 +428,42 @@
         const low = parseFloat(tr.querySelector('[data-field="low"]').value);
 
         if(el.tagName === 'SELECT') { el.className = 'status-badge ' + (el.value === 'TGT' ? 'badge-tgt' : 'badge-active'); }
-
         tr.querySelector('.out-minOI').innerText = !isNaN(lot) ? (lot * 90).toLocaleString() : '-';
 
         if (!isNaN(high) && !isNaN(strikeDiff)) {
             tr.querySelector('.out-ceStart').innerText = excelFloor(high * 0.97, strikeDiff);
             tr.querySelector('.out-ceEnd').innerText = excelCeil(high * 1.03, strikeDiff);
-        } else {
-            tr.querySelector('.out-ceStart').innerText = '-'; tr.querySelector('.out-ceEnd').innerText = '-';
-        }
+        } else { tr.querySelector('.out-ceStart').innerText = '-'; tr.querySelector('.out-ceEnd').innerText = '-'; }
 
         if (!isNaN(low) && !isNaN(strikeDiff)) {
             tr.querySelector('.out-peStart').innerText = excelCeil(low * 1.03, strikeDiff);
             tr.querySelector('.out-peEnd').innerText = excelFloor(low * 0.97, strikeDiff);
-        } else {
-            tr.querySelector('.out-peStart').innerText = '-'; tr.querySelector('.out-peEnd').innerText = '-';
-        }
-        triggerSave();
+        } else { tr.querySelector('.out-peStart').innerText = '-'; tr.querySelector('.out-peEnd').innerText = '-'; }
+        triggerSaveS1();
     }
 
-    function triggerSave() {
-        const ind = document.getElementById('saveIndicator');
+    function triggerSaveS1() {
+        const ind = document.getElementById('saveIndicator1');
         ind.style.opacity = '1'; setTimeout(() => ind.style.opacity = '0', 1500);
-        
-        const rows = document.querySelectorAll('#dataBody tr');
-        appData = [];
+        const rows = document.querySelectorAll('#dataBody1 tr');
+        appDataS1 = [];
         rows.forEach((row, i) => {
             const inputs = row.querySelectorAll('input, select');
             const rowObj = { id: i };
             inputs.forEach(inp => { rowObj[inp.dataset.field] = inp.value; });
-            appData.push(rowObj);
+            appDataS1.push(rowObj);
         });
-        
-        localStorage.setItem('shivaMasterDataV2', JSON.stringify(appData));
-        renderCalculations(); 
+        localStorage.setItem('shivaS1', JSON.stringify(appDataS1));
+        renderCalculationsS1(); 
     }
 
-    function renderCalculations() {
-        const tbody = document.getElementById('calcBody');
+    function renderCalculationsS1() {
+        const tbody = document.getElementById('calcBody1');
         tbody.innerHTML = '';
-
-        appData.forEach(row => {
+        appDataS1.forEach((row, idx) => {
             const tr = document.createElement('tr');
-            
-            // Returns: Entry, Buffer, T1, T2, T3, T4, MSL, TSL, SL
             const ce = _0xEngine._c(row.ceStat || 'NO TGT', parseFloat(row.fcStrike), parseFloat(row.ce4D), parseFloat(row.ce3D), true);
             const pe = _0xEngine._c(row.peStat || 'NO TGT', parseFloat(row.fpStrike), parseFloat(row.pe4D), parseFloat(row.pe3D), false);
-
-            let msg = '';
-            if(ce[0] !== 'N.A' && ce[0] !== undefined) {
-                msg += `${row.stock || ''} ${row.fcStrike || ''} CE\nEntry: ${ce[0]} - ${ce[1]}\nTGT: ${ce[2]} | ${ce[3]} | ${ce[4]} | ${ce[5]}\nSL: ${ce[8]}\n\n`;
-            }
-            if(pe[0] !== 'N.A' && pe[0] !== undefined) {
-                msg += `${row.stock || ''} ${row.fpStrike || ''} PE\nEntry: ${pe[0]} - ${pe[1]}\nTGT: ${pe[2]} | ${pe[3]} | ${pe[4]} | ${pe[5]}\nSL: ${pe[8]}`;
-            }
 
             tr.innerHTML = `
                 <td><strong>${row.stock || ''}</strong></td>
@@ -291,72 +476,164 @@
                 <td class="bg-red">${pe[0]}</td><td class="bg-red">${pe[1]}</td>
                 <td class="bg-red"><strong>${pe[2]}</strong></td><td class="bg-red"><strong>${pe[3]}</strong></td><td class="bg-red"><strong>${pe[4]}</strong></td><td class="bg-red"><strong>${pe[5]}</strong></td>
                 <td class="bg-dark">${pe[6]}</td><td class="bg-dark">${pe[7]}</td><td class="bg-red" style="font-weight:900;">${pe[8]}</td>
-                
-                <td class="message-col">${msg}</td>
             `;
             tbody.appendChild(tr);
         });
     }
 
-    function addRow(data = {}) {
-        const tbody = document.getElementById('dataBody');
+    function addRowS1(data = {}) {
+        const tbody = document.getElementById('dataBody1');
         const tr = document.createElement('tr');
-        
         const ceStatVal = data.ceStat || 'NO TGT';
         const ceStatClass = ceStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
-        
         const peStatVal = data.peStat || 'NO TGT';
         const peStatClass = peStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
 
         tr.innerHTML = `
-            <td><input type="text" data-field="stock" value="${data.stock || ''}" placeholder="Stock" oninput="handleInput(this)"></td>
-            <td><input type="number" data-field="lot" value="${data.lot || ''}" oninput="handleInput(this)"></td>
+            <td><input type="text" data-field="stock" value="${data.stock || ''}" placeholder="Stock" oninput="handleInputS1(this)"></td>
+            <td><input type="number" data-field="lot" value="${data.lot || ''}" oninput="handleInputS1(this)"></td>
             <td class="bg-green readonly-calc out-minOI">-</td>
-            <td><input type="number" data-field="strikeDiff" value="${data.strikeDiff || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="high" value="${data.high || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="low" value="${data.low || ''}" oninput="handleInput(this)"></td>
+            <td><input type="number" data-field="strikeDiff" value="${data.strikeDiff || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="high" value="${data.high || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="low" value="${data.low || ''}" oninput="handleInputS1(this)"></td>
             
             <td class="bg-green readonly-calc out-ceStart">-</td>
             <td class="bg-green readonly-calc out-ceEnd">-</td>
             <td class="bg-red readonly-calc out-peStart">-</td>
             <td class="bg-red readonly-calc out-peEnd">-</td>
             
-            <td><input type="number" data-field="fcStrike" value="${data.fcStrike || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce4D" value="${data.ce4D || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce3D" value="${data.ce3D || ''}" oninput="handleInput(this)"></td>
+            <td><input type="number" data-field="fcStrike" value="${data.fcStrike || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce4D" value="${data.ce4D || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce3D" value="${data.ce3D || ''}" oninput="handleInputS1(this)"></td>
             <td>
-                <select data-field="ceStat" class="status-badge ${ceStatClass}" onchange="handleInput(this)">
+                <select data-field="ceStat" class="status-badge ${ceStatClass}" onchange="handleInputS1(this)">
                     <option value="NO TGT" ${ceStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
                     <option value="TGT" ${ceStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
                 </select>
             </td>
 
-            <td><input type="number" data-field="fpStrike" value="${data.fpStrike || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe4D" value="${data.pe4D || ''}" oninput="handleInput(this)"></td>
-            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe3D" value="${data.pe3D || ''}" oninput="handleInput(this)"></td>
+            <td><input type="number" data-field="fpStrike" value="${data.fpStrike || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe4D" value="${data.pe4D || ''}" oninput="handleInputS1(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe3D" value="${data.pe3D || ''}" oninput="handleInputS1(this)"></td>
             <td>
-                <select data-field="peStat" class="status-badge ${peStatClass}" onchange="handleInput(this)">
+                <select data-field="peStat" class="status-badge ${peStatClass}" onchange="handleInputS1(this)">
                     <option value="NO TGT" ${peStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
                     <option value="TGT" ${peStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
                 </select>
             </td>
             
-            <td><button class="btn-delete" onclick="deleteRow(this)">X</button></td>
+            <td><button class="btn-delete" onclick="this.closest('tr').remove(); triggerSaveS1();">X</button></td>
         `;
         tbody.appendChild(tr);
-        handleInput(tr.querySelector('[data-field="stock"]'));
+        handleInputS1(tr.querySelector('[data-field="stock"]'));
+    }
+    function clearDataS1() { if(confirm("Clear Strategy 1 data permanently?")) { localStorage.removeItem('shivaS1'); document.getElementById('dataBody1').innerHTML = ''; addRowS1(); } }
+
+
+    /* ==========================================
+       STRATEGY 2 LOGIC (Fixed Indices Side-by-Side)
+       ========================================== */
+    function buildS2Grid() {
+        let inHTML = '';
+        S2_CONFIG.forEach(cfg => {
+            const ceSt = appDataS2[`${cfg.id}_ce_strike`] || '';
+            const cePr = appDataS2[`${cfg.id}_ce_price`] || '';
+            const peSt = appDataS2[`${cfg.id}_pe_strike`] || '';
+            const pePr = appDataS2[`${cfg.id}_pe_price`] || '';
+
+            inHTML += `
+                <tr>
+                    <td rowspan="2" style="font-weight:bold; font-size:14px;">${cfg.name}</td>
+                    <td rowspan="2">${cfg.range}</td>
+                    <td style="background:#4caf50;color:white;font-weight:bold;">Call (CE)</td>
+                    <td><input type="number" id="${cfg.id}_ce_strike" value="${ceSt}" placeholder="Strike" oninput="triggerSaveS2()"></td>
+                    <td class="bg-yellow"><input type="number" step="0.05" id="${cfg.id}_ce_price" value="${cePr}" placeholder="Price" oninput="triggerSaveS2()"></td>
+                </tr>
+                <tr>
+                    <td style="background:#f44336;color:white;font-weight:bold;">Put (PE)</td>
+                    <td><input type="number" id="${cfg.id}_pe_strike" value="${peSt}" placeholder="Strike" oninput="triggerSaveS2()"></td>
+                    <td class="bg-yellow"><input type="number" step="0.05" id="${cfg.id}_pe_price" value="${pePr}" placeholder="Price" oninput="triggerSaveS2()"></td>
+                </tr>
+            `;
+        });
+        document.getElementById('dataBody2').innerHTML = inHTML;
     }
 
-    function deleteRow(btn) { btn.closest('tr').remove(); triggerSave(); }
-    function clearData() { if(confirm("Clear all data permanently?")) { localStorage.removeItem('shivaMasterDataV2'); document.getElementById('dataBody').innerHTML = ''; addRow(); } }
+    function triggerSaveS2() {
+        const ind = document.getElementById('saveIndicator2');
+        ind.style.opacity = '1'; setTimeout(() => ind.style.opacity = '0', 1500);
+        appDataS2 = {};
+        S2_CONFIG.forEach(cfg => {
+            appDataS2[`${cfg.id}_ce_strike`] = document.getElementById(`${cfg.id}_ce_strike`).value;
+            appDataS2[`${cfg.id}_ce_price`] = document.getElementById(`${cfg.id}_ce_price`).value;
+            appDataS2[`${cfg.id}_pe_strike`] = document.getElementById(`${cfg.id}_pe_strike`).value;
+            appDataS2[`${cfg.id}_pe_price`] = document.getElementById(`${cfg.id}_pe_price`).value;
+        });
+        localStorage.setItem('shivaS2', JSON.stringify(appDataS2));
+        renderCalculationsS2(); 
+    }
 
+    function renderCalculationsS2() {
+        let outHTML = '';
+        S2_CONFIG.forEach((cfg) => {
+            const ceSt = appDataS2[`${cfg.id}_ce_strike`] || '';
+            const ceP = parseFloat(appDataS2[`${cfg.id}_ce_price`]);
+            const peSt = appDataS2[`${cfg.id}_pe_strike`] || '';
+            const peP = parseFloat(appDataS2[`${cfg.id}_pe_price`]);
+
+            const ce = _0xEngine._s2(ceP, cfg.buf);
+            const pe = _0xEngine._s2(peP, cfg.buf);
+
+            outHTML += `
+                <tr>
+                    <td rowspan="2"><strong>${cfg.name}</strong></td>
+                    <td style="background:#4caf50;color:white;">CE</td>
+                    <td class="bg-yellow"><strong>${ceSt}</strong></td>
+                    <td class="bg-green" style="font-weight:900;">${ce[0]}</td>
+                    <td class="bg-dark" style="color:#E57373; font-weight:bold;">${ce[1]}</td>
+                    <td class="bg-green"><strong>${ce[2]}</strong></td>
+                    <td class="bg-green"><strong>${ce[3]}</strong></td>
+                    <td class="bg-green"><strong>${ce[4]}</strong></td>
+                    <td class="bg-green"><strong>${ce[5]}</strong></td>
+                    <td class="bg-green"><strong>${ce[6]}</strong></td>
+                </tr>
+                <tr>
+                    <td style="background:#f44336;color:white;">PE</td>
+                    <td class="bg-yellow"><strong>${peSt}</strong></td>
+                    <td class="bg-red" style="font-weight:900;">${pe[0]}</td>
+                    <td class="bg-dark" style="color:#E57373; font-weight:bold;">${pe[1]}</td>
+                    <td class="bg-red"><strong>${pe[2]}</strong></td>
+                    <td class="bg-red"><strong>${pe[3]}</strong></td>
+                    <td class="bg-red"><strong>${pe[4]}</strong></td>
+                    <td class="bg-red"><strong>${pe[5]}</strong></td>
+                    <td class="bg-red"><strong>${pe[6]}</strong></td>
+                </tr>
+            `;
+        });
+        document.getElementById('calcBody2').innerHTML = outHTML;
+    }
+
+    function clearDataS2() { 
+        if(confirm("Clear Strategy 2 inputs?")) { 
+            localStorage.removeItem('shivaS2'); 
+            appDataS2 = {}; 
+            buildS2Grid(); 
+            renderCalculationsS2(); 
+        } 
+    }
+
+    // --- INITIALIZATION ---
     window.onload = () => {
-        const saved = localStorage.getItem('shivaMasterDataV2');
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            if (parsed.length > 0) { parsed.forEach(row => addRow(row)); renderCalculations(); return; }
-        }
-        addRow(); 
+        const saved1 = localStorage.getItem('shivaS1');
+        if (saved1) {
+            const parsed = JSON.parse(saved1);
+            if (parsed.length > 0) { parsed.forEach(row => addRowS1(row)); renderCalculationsS1(); } else { addRowS1(); }
+        } else { addRowS1(); }
+
+        const saved2 = localStorage.getItem('shivaS2');
+        if (saved2) { appDataS2 = JSON.parse(saved2); } 
+        buildS2Grid();
+        renderCalculationsS2();
     };
 </script>
 </body>
