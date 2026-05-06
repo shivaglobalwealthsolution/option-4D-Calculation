@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Terminal | Shiva Global Wealth Solution</title>
+    <style>
+        :root { --bg-deep: #0F0F1A; --bg-card: #1A1A2E; --accent-saffron: #FF9933; --text-main: #E0E0E0; --text-muted: #A0A0B5; --border-subtle: #2A2A40; --success-green: #4CAF50; --danger-red: #C62828; }
+        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; background-color: var(--bg-deep); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; overflow-x: hidden; }
+        
+        .site-header { background: var(--bg-card); padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border-subtle); box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 100; position: sticky; top: 0;}
+        .logo-container { flex: 1; display: flex; align-items: center; gap: 15px;}
+        .logo-container img { height: 50px; object-fit: contain; }
+        .company-title { flex: 2; text-align: center; color: #fff; margin: 0; font-size: 22px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;}
+        .company-title span { color: var(--accent-saffron); }
+        .header-spacer { flex: 1; } 
+        
+        .main-nav { background: rgba(0,0,0,0.3); display: flex; justify-content: center; padding: 0; margin: 0; list-style: none; border-bottom: 1px solid var(--border-subtle); }
+        .main-nav a { display: block; color: var(--text-muted); text-decoration: none; padding: 15px 30px; font-size: 14px; font-weight: 600; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px;}
+        .main-nav a:hover { color: #fff; }
+        .main-nav a.active { color: var(--accent-saffron); border-bottom: 2px solid var(--accent-saffron); }
+
+        .container { max-width: 100%; padding: 40px 20px; flex: 1; }
+        
+        .btn { padding: 10px 20px; background: var(--accent-saffron); color: #000; border: none; border-radius: 4px; font-weight: bold; font-size: 13px; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+        .btn:hover { background: #fff; box-shadow: 0 0 15px rgba(255, 153, 51, 0.4); }
+        .btn-outline { background: transparent; border: 1px solid var(--accent-saffron); color: var(--accent-saffron); }
+        .btn-outline:hover { background: var(--accent-saffron); color: #000; }
+
+        .strategy-module { background: #0A0A12; border: 1px solid var(--border-subtle); border-radius: 12px; padding: 25px; margin-bottom: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .strategy-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px; }
+        .strategy-actions { display: flex; gap: 10px; align-items: center; }
+        .strategy-title-container { text-align: left; }
+        .strategy-title-container h2 { margin: 0; font-size: 24px; color: #fff; display: inline-block;}
+        .strategy-title-container h2 span { color: var(--accent-saffron); }
+        .strategy-title-container p { color: var(--text-muted); margin: 5px 0 0 0; font-size: 13px; }
+        
+        .save-indicator { color: var(--accent-saffron); font-weight: bold; font-size: 14px; opacity: 0; transition: opacity 0.3s; background: rgba(255, 153, 51, 0.1); padding: 8px 12px; border-radius: 4px;}
+
+        .table-box { background: var(--bg-card); padding: 20px; border-radius: 8px; border: 1px solid var(--border-subtle); margin-bottom: 30px; overflow-x: auto; }
+        .table-box h3 { margin-top: 0; color: #fff; font-size: 16px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px;}
+        table { width: 100%; border-collapse: collapse; min-width: 1500px; }
+        th, td { border: 1px solid var(--border-subtle); padding: 10px 8px; text-align: center; font-size: 13px; white-space: nowrap; color: var(--text-main); }
+        th { background: #11111A; position: sticky; top: 0; z-index: 10; font-weight: 600; color: var(--accent-saffron); letter-spacing: 1px;}
+        
+        .bg-green { background-color: rgba(46, 125, 50, 0.1) !important; color: #81C784; }
+        .bg-red { background-color: rgba(198, 40, 40, 0.1) !important; color: #E57373; }
+        .bg-yellow { background-color: rgba(255, 153, 51, 0.1) !important; color: var(--accent-saffron); }
+        .bg-dark { background-color: rgba(0, 0, 0, 0.4) !important; color: #aaa; }
+        
+        input { width: 90%; padding: 6px; background: var(--bg-deep); border: 1px solid var(--border-subtle); color: #fff; border-radius: 4px; font-size: 13px; text-align: center; }
+        input:focus { outline: none; border-color: var(--accent-saffron); }
+        .message-col { text-align: left; font-size: 11px; white-space: pre-wrap; font-family: monospace; color: var(--accent-saffron); background: rgba(0,0,0,0.3);}
+
+        select.status-badge { appearance: none; -webkit-appearance: none; width: 100%; min-width: 90px; padding: 6px 22px 6px 8px; font-size: 11px; font-weight: 800; border-radius: 4px; letter-spacing: 0.5px; cursor: pointer; text-align: center; text-align-last: center; outline: none; transition: all 0.3s ease; background-repeat: no-repeat; background-position: right 8px center; background-size: 10px auto; }
+        select.status-badge option { background: var(--bg-card); color: #fff; }
+        select.status-badge.badge-active { background-color: rgba(255, 153, 51, 0.1); color: var(--accent-saffron); border: 1px solid rgba(255, 153, 51, 0.4); background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FF9933%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); }
+        select.status-badge.badge-tgt { background-color: rgba(76, 175, 80, 0.1); color: #81C784; border: 1px solid rgba(76, 175, 80, 0.4); background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%2381C784%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E"); }
+
+        .btn-delete { background: rgba(198, 40, 40, 0.2); border: 1px solid var(--danger-red); color: #E57373; padding: 4px 10px; font-weight: bold; font-size: 12px; border-radius: 4px; cursor: pointer; transition: 0.2s;}
+        .btn-delete:hover { background: var(--danger-red); color: #fff;}
+
+        .site-footer { background: #05050A; color: var(--text-muted); text-align: center; padding: 40px 20px; margin-top: auto; border-top: 1px solid var(--accent-saffron);}
+        .disclaimer-box { border: 1px solid #333; padding: 20px; text-align: left; font-size: 11px; line-height: 1.6; max-width: 1200px; margin: 30px auto 0 auto; background: rgba(255,0,0,0.05); color: #888;}
+        .footer-links a { color: var(--accent-saffron); text-decoration: none; margin: 0 10px;}
+        
+        @media (max-width: 950px) {
+            .company-title { font-size: 16px; }
+            .header-spacer { display: none; }
+            .strategy-header { flex-direction: column; gap: 20px; align-items: flex-start;}
+            .strategy-actions { justify-content: flex-start; width: 100%; flex-wrap: wrap;}
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="logo-container">
+        <img src="Shiva.png" alt="Shiva Logo" onerror="this.src='https://via.placeholder.com/150x50/1A1A2E/FF9933?text=SHIVA+GLOBAL'">
+    </div>
+    <h1 class="company-title">Shiva Global <span>Wealth Solution</span></h1>
+    <div class="header-spacer"></div>
+</header>
+
+<ul class="main-nav">
+    <li><a href="index.html">Company Portfolio</a></li>
+    <li><a href="terminal.html" class="active">Research Terminal</a></li>
+</ul>
+
+<main class="container">
+    
+    <!-- STRATEGY MODULE 1 -->
+    <div class="strategy-module">
+        <div class="strategy-header">
+            <div class="strategy-title-container">
+                <h2>Shiva <span>Research Terminal (Strategy 1)</span></h2>
+                <p>Personal logic engine for Options calculations. 4-Target System. Data is auto-saved locally.</p>
+            </div>
+            
+            <div class="strategy-actions">
+                <span class="save-indicator" id="saveIndicator">✓ Auto-Saved</span>
+                <button class="btn" onclick="addRow()">+ Add Stock</button>
+                <button class="btn btn-outline" style="border-color: var(--danger-red); color: var(--danger-red);" onclick="clearData()">Clear Data</button>
+            </div>
+        </div>
+
+        <div class="table-box">
+            <h3>1. Market Data Input Feed</h3>
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Stock Name</th>
+                        <th>Lot Size</th>
+                        <th class="bg-green">Min OI</th>
+                        <th>Strike Diff</th>
+                        <th class="bg-yellow">High</th>
+                        <th class="bg-yellow">Low</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">CE Start</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">CE End</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE Start</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE End</th>
+                        <th>Final CE Strike</th>
+                        <th class="bg-yellow">CE 4D High</th>
+                        <th class="bg-yellow">CE 3D Low</th>
+                        <th>CE Status</th>
+                        <th>Final PE Strike</th>
+                        <th class="bg-yellow">PE 4D High</th>
+                        <th class="bg-yellow">PE 3D Low</th>
+                        <th>PE Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="dataBody"></tbody>
+            </table>
+        </div>
+
+        <div class="table-box" style="margin-bottom: 0;">
+            <h3>2. Algorithmic Output Engine (4 Targets + Explicit SL Math)</h3>
+            <table id="calcTable">
+                <thead>
+                    <tr>
+                        <th>Stock</th>
+                        <th class="bg-yellow">CE Strike</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">CE Entry</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">Buffer</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">TGT 1</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">TGT 2</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">TGT 3</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">TGT 4</th>
+                        <th class="bg-dark">MSL</th>
+                        <th class="bg-dark">TSL</th>
+                        <th style="background:#4caf50;color:white;border:1px solid #388e3c">Final SL</th>
+                        
+                        <th class="bg-yellow">PE Strike</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE Entry</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">Buffer</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">TGT 1</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">TGT 2</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">TGT 3</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">TGT 4</th>
+                        <th class="bg-dark">MSL</th>
+                        <th class="bg-dark">TSL</th>
+                        <th style="background:#f44336;color:white;border:1px solid #d32f2f">Final SL</th>
+                        
+                        <th>Generated Broadcast Message</th>
+                    </tr>
+                </thead>
+                <tbody id="calcBody"></tbody>
+            </table>
+        </div>
+    </div> <!-- End Strategy Module Wrapper -->
+
+</main>
+
+<footer class="site-footer">
+    <div style="margin-bottom: 20px;" class="footer-links">
+        <a href="mailto:shivaglobalwealthsolution@gmail.com">shivaglobalwealthsolution@gmail.com</a> | 
+        <a href="https://linktr.ee/bhargavrecommend1ng" target="_blank">Linktree</a> | 
+        Based in Gujarat, India
+    </div>
+    <div>&copy; 2026 Shiva Global Wealth Solution. A Shree Shivam Foundation Venture.</div>
+    <div class="disclaimer-box"><strong>MANDATORY SEBI DISCLAIMER:</strong> Bhargav Achary and Shiva Global Wealth Solution are NOT registered with the Securities and Exchange Board of India (SEBI) as a Research Analyst (RA) or Investment Adviser (IA).</div>
+</footer>
+
+<script>
+    let appData = [];
+
+    function mround(val) { if (isNaN(val) || val === null) return 0; return (Math.round(val * 20) / 20).toFixed(2); }
+    function excelFloor(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.floor(num / sig) * sig; }
+    function excelCeil(num, sig) { if (!sig || isNaN(sig) || isNaN(num) || sig === 0) return '-'; return Math.ceil(num / sig) * sig; }
+
+    /* =========================================================================
+       UPDATED OBFUSCATED BLACK BOX ENGINE 
+       Now outputs 9 variables: Entry, Buffer, T1, T2, T3, T4, MSL, TSL, Final SL
+       Targets: 3%, 4.5%, 6%, 8%
+       ========================================================================= */
+    const _0xEngine = (function(){
+        const _0xC = JSON.parse(atob('eyJDRSI6eyJFbnRyeU11bCI6MS4wNywiQnVmZmVyTXVsIjoxLjAyNSwiVGd0cyI6WzAuMDMsMC4wNDUsMC4wNiwwLjA4XSwiTXNsU3ViIjowLjAyNSwiVHNsTXVsIjowLjl9LCJQRSI6eyJFbnRyeU11bCI6MS4wNywiQnVmZmVyTXVsIjoxLjA3LCJUZ3RzIjpbMC4wMywwLjA0NSwwLjA2LDAuMDhdLCJNc2xTdWIiOjAuMDI1LCJUc2xNdWwiOjAuOX19'));
+        return {
+            _c: function(_s, _st, _h, _l, _isC) {
+                if(_s === atob('VEdU') || !_h || !_st) return Array(9).fill(atob('Ti5B'));
+                let _cf = _isC ? _0xC.CE : _0xC.PE;
+                let _e = parseFloat(mround(_h * _cf.EntryMul)); 
+                let _b = parseFloat(mround(_e * _cf.BufferMul));
+                let _t1 = parseFloat(mround(_e + (_st * _cf.Tgts[0])));
+                let _t2 = parseFloat(mround(_e + (_st * _cf.Tgts[1])));
+                let _t3 = parseFloat(mround(_e + (_st * _cf.Tgts[2])));
+                let _t4 = parseFloat(mround(_e + (_st * _cf.Tgts[3])));
+                let _m = parseFloat(mround(_e - (_st * _cf.MslSub)));
+                let _ts = parseFloat(mround(_l * _cf.TslMul)); 
+                let _sl = Math.max(_m, _ts).toFixed(2);
+                return [_e.toFixed(2), _b.toFixed(2), _t1.toFixed(2), _t2.toFixed(2), _t3.toFixed(2), _t4.toFixed(2), _m.toFixed(2), _ts.toFixed(2), _sl];
+            }
+        }
+    })();
+
+    function handleInput(el) {
+        const tr = el.closest('tr');
+        const lot = parseFloat(tr.querySelector('[data-field="lot"]').value);
+        const strikeDiff = parseFloat(tr.querySelector('[data-field="strikeDiff"]').value);
+        const high = parseFloat(tr.querySelector('[data-field="high"]').value);
+        const low = parseFloat(tr.querySelector('[data-field="low"]').value);
+
+        if(el.tagName === 'SELECT') { el.className = 'status-badge ' + (el.value === 'TGT' ? 'badge-tgt' : 'badge-active'); }
+
+        tr.querySelector('.out-minOI').innerText = !isNaN(lot) ? (lot * 90).toLocaleString() : '-';
+
+        if (!isNaN(high) && !isNaN(strikeDiff)) {
+            tr.querySelector('.out-ceStart').innerText = excelFloor(high * 0.97, strikeDiff);
+            tr.querySelector('.out-ceEnd').innerText = excelCeil(high * 1.03, strikeDiff);
+        } else {
+            tr.querySelector('.out-ceStart').innerText = '-'; tr.querySelector('.out-ceEnd').innerText = '-';
+        }
+
+        if (!isNaN(low) && !isNaN(strikeDiff)) {
+            tr.querySelector('.out-peStart').innerText = excelCeil(low * 1.03, strikeDiff);
+            tr.querySelector('.out-peEnd').innerText = excelFloor(low * 0.97, strikeDiff);
+        } else {
+            tr.querySelector('.out-peStart').innerText = '-'; tr.querySelector('.out-peEnd').innerText = '-';
+        }
+        triggerSave();
+    }
+
+    function triggerSave() {
+        const ind = document.getElementById('saveIndicator');
+        ind.style.opacity = '1'; setTimeout(() => ind.style.opacity = '0', 1500);
+        
+        const rows = document.querySelectorAll('#dataBody tr');
+        appData = [];
+        rows.forEach((row, i) => {
+            const inputs = row.querySelectorAll('input, select');
+            const rowObj = { id: i };
+            inputs.forEach(inp => { rowObj[inp.dataset.field] = inp.value; });
+            appData.push(rowObj);
+        });
+        
+        localStorage.setItem('shivaMasterDataV2', JSON.stringify(appData));
+        renderCalculations(); 
+    }
+
+    function renderCalculations() {
+        const tbody = document.getElementById('calcBody');
+        tbody.innerHTML = '';
+
+        appData.forEach(row => {
+            const tr = document.createElement('tr');
+            
+            // Returns: Entry, Buffer, T1, T2, T3, T4, MSL, TSL, SL
+            const ce = _0xEngine._c(row.ceStat || 'NO TGT', parseFloat(row.fcStrike), parseFloat(row.ce4D), parseFloat(row.ce3D), true);
+            const pe = _0xEngine._c(row.peStat || 'NO TGT', parseFloat(row.fpStrike), parseFloat(row.pe4D), parseFloat(row.pe3D), false);
+
+            let msg = '';
+            if(ce[0] !== 'N.A' && ce[0] !== undefined) {
+                msg += `${row.stock || ''} ${row.fcStrike || ''} CE\nEntry: ${ce[0]} - ${ce[1]}\nTGT: ${ce[2]} | ${ce[3]} | ${ce[4]} | ${ce[5]}\nSL: ${ce[8]}\n\n`;
+            }
+            if(pe[0] !== 'N.A' && pe[0] !== undefined) {
+                msg += `${row.stock || ''} ${row.fpStrike || ''} PE\nEntry: ${pe[0]} - ${pe[1]}\nTGT: ${pe[2]} | ${pe[3]} | ${pe[4]} | ${pe[5]}\nSL: ${pe[8]}`;
+            }
+
+            tr.innerHTML = `
+                <td><strong>${row.stock || ''}</strong></td>
+                <td class="bg-yellow"><strong>${row.fcStrike || ''}</strong></td>
+                <td class="bg-green">${ce[0]}</td><td class="bg-green">${ce[1]}</td>
+                <td class="bg-green"><strong>${ce[2]}</strong></td><td class="bg-green"><strong>${ce[3]}</strong></td><td class="bg-green"><strong>${ce[4]}</strong></td><td class="bg-green"><strong>${ce[5]}</strong></td>
+                <td class="bg-dark">${ce[6]}</td><td class="bg-dark">${ce[7]}</td><td class="bg-green" style="font-weight:900;">${ce[8]}</td>
+                
+                <td class="bg-yellow"><strong>${row.fpStrike || ''}</strong></td>
+                <td class="bg-red">${pe[0]}</td><td class="bg-red">${pe[1]}</td>
+                <td class="bg-red"><strong>${pe[2]}</strong></td><td class="bg-red"><strong>${pe[3]}</strong></td><td class="bg-red"><strong>${pe[4]}</strong></td><td class="bg-red"><strong>${pe[5]}</strong></td>
+                <td class="bg-dark">${pe[6]}</td><td class="bg-dark">${pe[7]}</td><td class="bg-red" style="font-weight:900;">${pe[8]}</td>
+                
+                <td class="message-col">${msg}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    function addRow(data = {}) {
+        const tbody = document.getElementById('dataBody');
+        const tr = document.createElement('tr');
+        
+        const ceStatVal = data.ceStat || 'NO TGT';
+        const ceStatClass = ceStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
+        
+        const peStatVal = data.peStat || 'NO TGT';
+        const peStatClass = peStatVal === 'TGT' ? 'badge-tgt' : 'badge-active';
+
+        tr.innerHTML = `
+            <td><input type="text" data-field="stock" value="${data.stock || ''}" placeholder="Stock" oninput="handleInput(this)"></td>
+            <td><input type="number" data-field="lot" value="${data.lot || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-green readonly-calc out-minOI">-</td>
+            <td><input type="number" data-field="strikeDiff" value="${data.strikeDiff || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="high" value="${data.high || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="low" value="${data.low || ''}" oninput="handleInput(this)"></td>
+            
+            <td class="bg-green readonly-calc out-ceStart">-</td>
+            <td class="bg-green readonly-calc out-ceEnd">-</td>
+            <td class="bg-red readonly-calc out-peStart">-</td>
+            <td class="bg-red readonly-calc out-peEnd">-</td>
+            
+            <td><input type="number" data-field="fcStrike" value="${data.fcStrike || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce4D" value="${data.ce4D || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="ce3D" value="${data.ce3D || ''}" oninput="handleInput(this)"></td>
+            <td>
+                <select data-field="ceStat" class="status-badge ${ceStatClass}" onchange="handleInput(this)">
+                    <option value="NO TGT" ${ceStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
+                    <option value="TGT" ${ceStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
+                </select>
+            </td>
+
+            <td><input type="number" data-field="fpStrike" value="${data.fpStrike || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe4D" value="${data.pe4D || ''}" oninput="handleInput(this)"></td>
+            <td class="bg-yellow"><input type="number" step="0.05" data-field="pe3D" value="${data.pe3D || ''}" oninput="handleInput(this)"></td>
+            <td>
+                <select data-field="peStat" class="status-badge ${peStatClass}" onchange="handleInput(this)">
+                    <option value="NO TGT" ${peStatVal === 'NO TGT' ? 'selected' : ''}>ACTIVE</option>
+                    <option value="TGT" ${peStatVal === 'TGT' ? 'selected' : ''}>TGT HIT</option>
+                </select>
+            </td>
+            
+            <td><button class="btn-delete" onclick="deleteRow(this)">X</button></td>
+        `;
+        tbody.appendChild(tr);
+        handleInput(tr.querySelector('[data-field="stock"]'));
+    }
+
+    function deleteRow(btn) { btn.closest('tr').remove(); triggerSave(); }
+    function clearData() { if(confirm("Clear all data permanently?")) { localStorage.removeItem('shivaMasterDataV2'); document.getElementById('dataBody').innerHTML = ''; addRow(); } }
+
+    window.onload = () => {
+        const saved = localStorage.getItem('shivaMasterDataV2');
+        if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.length > 0) { parsed.forEach(row => addRow(row)); renderCalculations(); return; }
+        }
+        addRow(); 
+    };
+</script>
+</body>
+</html>
