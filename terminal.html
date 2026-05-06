@@ -122,7 +122,7 @@
         </div>
 
         <div class="table-box">
-            <h3>1. Market Data Input Feed</h3>
+            <h3>1. Input Feed</h3>
             <table id="dataTable1">
                 <thead>
                     <tr>
@@ -137,12 +137,12 @@
                         <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE Start</th>
                         <th style="background:#f44336;color:white;border:1px solid #d32f2f">PE End</th>
                         <th>Final CE Strike</th>
-                        <th class="bg-yellow">CE 4D High</th>
-                        <th class="bg-yellow">CE 3D Low</th>
+                        <th class="bg-yellow">CE 4D Highest High</th>
+                        <th class="bg-yellow">CE 3D Lowest Low</th>
                         <th>CE Status</th>
                         <th>Final PE Strike</th>
-                        <th class="bg-yellow">PE 4D High</th>
-                        <th class="bg-yellow">PE 3D Low</th>
+                        <th class="bg-yellow">PE 4D Highest High</th>
+                        <th class="bg-yellow">PE 3D Lowest Low</th>
                         <th>PE Status</th>
                         <th>Action</th>
                     </tr>
@@ -153,7 +153,7 @@
 
         <div class="table-box" style="margin-bottom: 0;">
             <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Algorithmic Output Engine</h3>
+                <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Output Engine</h3>
                 <div style="display: flex; gap: 10px;">
                     <button class="btn-export btn-copy" id="btnCopy1" onclick="copyToClipboard(1)">📋 Copy</button>
                     <button class="btn-export" onclick="downloadTXT(1)">💾 Save</button>
@@ -199,8 +199,8 @@
     <div class="strategy-module">
         <div class="strategy-header">
             <div class="strategy-title-container">
-                <h2>Index <span>9.30 Setup</span> Strategy 2</h2>
-                <p>Fixed Algorithmic calculation for Indices. Enter Strike and Price to generate 5 Targets and Stop-Loss instantly.</p>
+                <h2>Index <span>9:30 Setup</span> Strategy 2</h2>
+                <p>Fixed Algorithmic calculation for Indices. Enter Strike and Price to generate Targets and Stop-Loss instantly.</p>
             </div>
             
             <div class="strategy-actions">
@@ -214,7 +214,7 @@
             <!-- PANEL 1: INPUT -->
             <div class="table-box" style="margin-bottom: 0;">
                 <div style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px;">
-                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">1. Market Data Input Feed</h3>
+                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">1. Input Feed</h3>
                 </div>
                 <table id="dataTable2">
                     <thead>
@@ -233,7 +233,7 @@
             <!-- PANEL 2: OUTPUT -->
             <div class="table-box" style="margin-bottom: 0;">
                 <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-subtle); padding-bottom: 10px; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
-                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Algorithmic Output Engine</h3>
+                    <h3 style="margin: 0; color: #fff; font-size: 16px; border: none; padding: 0;">2. Output Engine</h3>
                     <div style="display: flex; gap: 10px;">
                         <button class="btn-export btn-copy" id="btnCopy2" onclick="copyToClipboard(2)">📋 Copy</button>
                         <button class="btn-export" onclick="downloadTXT(2)">💾 Save</button>
